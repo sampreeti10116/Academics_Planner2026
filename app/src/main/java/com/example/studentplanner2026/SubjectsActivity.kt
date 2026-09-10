@@ -45,7 +45,11 @@ class SubjectsActivity : AppCompatActivity() {
 
         recyclerSubjects.layoutManager = LinearLayoutManager(this)
 
-        recyclerSubjects.adapter = SubjectAdapter(subjects)
+        recyclerSubjects.adapter = SubjectAdapter(subjects) { position ->
+            subjects.removeAt(position)
+
+            recyclerSubjects.adapter?.notifyItemRemoved(position)
+        }
         btnAddSub=findViewById<MaterialButton>(R.id.btnAddSubject)
         btnAddSub.setOnClickListener {
             val intent= Intent(this, AddSubjectActivity::class.java)

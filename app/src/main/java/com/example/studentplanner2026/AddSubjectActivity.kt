@@ -29,6 +29,17 @@ class AddSubjectActivity : AppCompatActivity() {
         btnSaveSubject.setOnClickListener{
             val name = subjectName.text.toString()
             val code = subjectCode.text.toString()
+            val dbHelper = DatabaseHelper(this)
+            val db = dbHelper.writableDatabase
+
+            val values = android.content.ContentValues()
+            values.put("name", name)
+            values.put("code", code)
+
+            db.insert("subjects", null, values)
+
+            db.close()
+
             val intent = Intent()
             intent.putExtra("subjectName", name)
             intent.putExtra("subjectCode", code)

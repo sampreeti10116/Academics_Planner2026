@@ -12,7 +12,7 @@
         app:cardCornerRadius="12dp"
         app:cardElevation="4dp">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -22,18 +22,35 @@
                 android:id="@+id/tvSubjectName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Data Structures"
+                android:text="MAD"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="4dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
 
             <TextView
                 android:id="@+id/tvSubjectCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="CS301"
-                android:textSize="14sp" />
+                android:text="2CEIT5PE18"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@id/tvSubjectName"/>
 
-        </LinearLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDeleteSubject"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="Delete Subject"
+                app:icon="@drawable/baseline_delete_24"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="24dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                style="@style/Widget.Material3.Button.IconButton" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
