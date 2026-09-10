@@ -3,6 +3,7 @@
     <com.google.android.material.card.MaterialCardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -20,7 +21,7 @@
 
             <TextView
                 android:id="@+id/tvSubjectName"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="MAD"
                 android:textSize="18sp"
@@ -31,25 +32,39 @@
 
             <TextView
                 android:id="@+id/tvSubjectCode"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2CEIT5PE18"
                 android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvSubjectName"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnDeleteSubject"
+                style="@style/Widget.Material3.Button.IconButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
+                android:layout_marginEnd="8dp"
                 android:contentDescription="Delete Subject"
                 app:icon="@drawable/baseline_delete_24"
                 app:iconGravity="textStart"
                 app:iconPadding="0dp"
                 app:iconSize="24dp"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                style="@style/Widget.Material3.Button.IconButton" />
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEditSubject"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/rounded_edit_24"
+                app:iconPadding="0dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btnDeleteSubject"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -7,13 +7,18 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 
-class SubjectAdapter (private val subjects: List<Subject>, private val onDeleteClick: (Int) -> Unit):
+class SubjectAdapter (
+    private val subjects: List<Subject>,
+    private val onDeleteClick: (Int) -> Unit,
+    private val onEditClick: (Int) -> Unit
+):
     RecyclerView.Adapter<SubjectAdapter.SubjectViewHolder>(){
     class SubjectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val subjectName: TextView = itemView.findViewById<TextView>(R.id.tvSubjectName)
         val subjectCode: TextView = itemView.findViewById(R.id.tvSubjectCode)
         val deleteButton: MaterialButton = itemView.findViewById(R.id.btnDeleteSubject)
+        val editButton: MaterialButton = itemView.findViewById(R.id.btnEditSubject)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubjectViewHolder {
@@ -32,6 +37,9 @@ class SubjectAdapter (private val subjects: List<Subject>, private val onDeleteC
         holder.subjectCode.text = subject.code
         holder.deleteButton.setOnClickListener {
             onDeleteClick(position)
+        }
+        holder.editButton.setOnClickListener {
+            onEditClick(position)
         }
     }
 

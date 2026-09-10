@@ -48,24 +48,40 @@ class SubjectsActivity : AppCompatActivity() {
         recyclerSubjects.layoutManager = LinearLayoutManager(this)
         dbHelper = DatabaseHelper(this)
 
-        recyclerSubjects.adapter = SubjectAdapter(subjects) { position ->
+        recyclerSubjects.adapter = SubjectAdapter(
+            subjects,
 
-            val subject = subjects[position]
+            { position ->
 
-            val db = dbHelper.writableDatabase
+                val subject = subjects[position]
 
-            db.delete(
-                "subjects",
-                "name = ? AND code = ?",
-                arrayOf(subject.name, subject.code)
-            )
+                val db = dbHelper.writableDatabase
 
-            db.close()
+                db.delete(
+                    "subjects",
+                    "name = ? AND code = ?",
+                    arrayOf(subject.name, subject.code)
+                )
 
-            subjects.removeAt(position)
+                db.close()
 
-            recyclerSubjects.adapter?.notifyItemRemoved(position)
-        }
+                subjects.removeAt(position)
+
+                recyclerSubjects.adapter?.notifyItemRemoved(position)
+            },
+
+            { position ->
+
+                val subject = subjects[position]
+
+                val intent = Intent(this, EditSubjectActivity::class.java)
+
+                intent.putExtra("subjectName", subject.name)
+                intent.putExtra("subjectCode", subject.code)
+
+                startActivity(intent)
+            }
+        )
         btnAddSub=findViewById<MaterialButton>(R.id.btnAddSubject)
         btnAddSub.setOnClickListener {
             val intent= Intent(this, AddSubjectActivity::class.java)
@@ -94,5 +110,10 @@ class SubjectsActivity : AppCompatActivity() {
         db.close()
 
         recyclerSubjects.adapter?.notifyDataSetChanged()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadSubjects()
     }
 }
