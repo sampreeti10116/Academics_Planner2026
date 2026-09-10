@@ -119,6 +119,40 @@ Add Subject -> SQLite Database -> Subjects -> RecyclerView
 
 Subjects remain available even after restarting the application because they are loaded from the SQLite database during startup.
 
+## SQLite-Powered Delete Functionality
+
+The Delete Subject functionality has been integrated with the SQLite database.
+
+### Features Implemented
+
+- Delete button available on each subject card.
+- Identifies the selected subject from the RecyclerView.
+- Deletes the corresponding subject from the SQLite database.
+- Removes the subject from the RecyclerView immediately.
+- Deleted subjects remain removed after restarting the application.
+
+### Data Flow
+
+```text
+Select Subject
+      │
+      ▼
+Delete Button
+      │
+      ▼
+Delete from SQLite
+      │
+      ▼
+Remove from RecyclerView
+```
+
+### Demonstration
+
+Subjects can now be added to and deleted from the SQLite database while the RecyclerView remains synchronized with the stored data.
+
+<img width="372" height="861" alt="image" src="https://github.com/user-attachments/assets/6a312da1-4cfd-4d98-94da-3ad9c53e8d62" />
+
+
 
 ## Current Progress
 
@@ -138,10 +172,11 @@ Subjects remain available even after restarting the application because they are
 - [x] ConstraintLayout-based UI
 - [x] SQLite database integration
 - [x] Persistent subject storage (Load on app restart)
+- [x] Delete subject from SQLite database
 
 ### Upcoming Features
 
-- [ ] Delete subject from SQLite database
+
 - [ ] Edit subject functionality
 - [ ] Tasks module
 - [ ] Exams module
