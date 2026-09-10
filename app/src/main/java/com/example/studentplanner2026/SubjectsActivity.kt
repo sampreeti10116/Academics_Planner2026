@@ -15,6 +15,7 @@ import com.google.android.material.button.MaterialButton
 class SubjectsActivity : AppCompatActivity() {
     private lateinit var recyclerSubjects: RecyclerView
     private val subjects = mutableListOf<Subject>()
+    private lateinit var dbHelper: DatabaseHelper
     lateinit var btnAddSub : MaterialButton
     private val addSubjectLauncher =
         registerForActivityResult(
@@ -41,9 +42,11 @@ class SubjectsActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         recyclerSubjects = findViewById(R.id.RecyclerSubjects)
 
         recyclerSubjects.layoutManager = LinearLayoutManager(this)
+        dbHelper = DatabaseHelper(this)
 
         recyclerSubjects.adapter = SubjectAdapter(subjects) { position ->
             subjects.removeAt(position)
@@ -55,5 +58,28 @@ class SubjectsActivity : AppCompatActivity() {
             val intent= Intent(this, AddSubjectActivity::class.java)
             addSubjectLauncher.launch(intent)
         }
+        loadSubjects()
+    }
+
+    private fun loadSubjects() {
+
+        subjects.clear()
+
+        val db = dbHelper.readableDatabase
+
+        val cursor = db.rawQuery("SELECT name, code FROM subjects", null)
+
+        while (cursor.moveToNext()) {
+
+            val name = cursor.getString(0)
+            val code = cursor.getString(1)
+
+            subjects.add(Subject(name, code))
+        }
+
+        cursor.close()
+        db.close()
+
+        recyclerSubjects.adapter?.notifyDataSetChanged()
     }
 }
