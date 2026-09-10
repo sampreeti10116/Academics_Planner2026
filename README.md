@@ -79,25 +79,72 @@ This functionality is currently handled using the in-memory subject list.
   </tr>
 </table>
 
+## SQLite Database Integration
+
+Integrated **SQLite** using `SQLiteOpenHelper` to provide persistent local storage for the Subjects module.
+
+### Database Structure
+
+A local database named **AcademicsPlanner.db** is created with a `subjects` table.
+
+| Column | Type | Description |
+|--------|------|-------------|
+| id | INTEGER | Primary key (Auto Increment) |
+| name | TEXT | Subject name |
+| code | TEXT | Subject code |
+
+### Features Implemented
+
+- Created a `DatabaseHelper` class using `SQLiteOpenHelper`.
+- Automatically creates the `subjects` table when the application runs for the first time.
+- Saves subject details into SQLite using `ContentValues` and `insert()`.
+- Retrieves all saved subjects using SQL `SELECT` queries.
+- Displays stored subjects in the RecyclerView when the Subjects screen opens.
+- Subject data now persists even after closing and reopening the application.
+
+### Data Flow
+
+Add Subject -> SQLite Database -> Subjects -> RecyclerView
+
+<table>
+  <tr>
+    <td><img width="380" height="836" alt="image" src="https://github.com/user-attachments/assets/97be7e2f-5899-4a3c-9722-39f906dfc4db" /></td>
+    <td><img width="380" height="856" alt="image" src="https://github.com/user-attachments/assets/22fcc8e2-817d-4027-bf92-08c40aa405ee" /></td>
+    <td><img width="380" height="857" alt="image" src="https://github.com/user-attachments/assets/a4563e9d-347e-4f83-9035-42f3cc657a72" /></td>
+  </tr>
+</table>
+
+
+## Persistent Subject Storage
+
+Subjects remain available even after restarting the application because they are loaded from the SQLite database during startup.
+
+
 ## Current Progress
+
+### Completed
 
 - [x] Android Studio project setup
 - [x] Home page
 - [x] Subjects Activity
-- [x] Activity navigation using Intents
+- [x] Navigation using Intents
 - [x] Add Subject Activity
-- [x] Subject Name input
-- [x] Subject Code input
-- [x] Passing subject data between activities
+- [x] Subject Name & Subject Code input
+- [x] Activity Result API for passing data
 - [x] RecyclerView implementation
-- [x] Custom Subject Adapter
-- [x] MaterialCardView subject design
+- [x] MaterialCardView subject cards
+- [x] Add Subject functionality
 - [x] Delete Subject functionality
 - [x] ConstraintLayout-based UI
-- [ ] Persistent subject storage using SQLite
-- [ ] Edit Subject functionality
+- [x] SQLite database integration
+- [x] Persistent subject storage (Load on app restart)
+
+### Upcoming Features
+
+- [ ] Delete subject from SQLite database
+- [ ] Edit subject functionality
 - [ ] Tasks module
 - [ ] Exams module
 - [ ] Timetable module
-- [ ] Final UI improvements
-- [ ] Testing and bug fixing
+- [ ] UI polishing
+- [ ] Testing and bug fixes
