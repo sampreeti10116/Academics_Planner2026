@@ -49,6 +49,19 @@ class SubjectsActivity : AppCompatActivity() {
         dbHelper = DatabaseHelper(this)
 
         recyclerSubjects.adapter = SubjectAdapter(subjects) { position ->
+
+            val subject = subjects[position]
+
+            val db = dbHelper.writableDatabase
+
+            db.delete(
+                "subjects",
+                "name = ? AND code = ?",
+                arrayOf(subject.name, subject.code)
+            )
+
+            db.close()
+
             subjects.removeAt(position)
 
             recyclerSubjects.adapter?.notifyItemRemoved(position)
