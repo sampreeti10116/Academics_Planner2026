@@ -60,20 +60,44 @@ Each subject is displayed using a **MaterialCardView** containing:
   </tr>
 </table>
 
+## Added Delete Buttons to remove a Subject
+
+Added a **Delete** button to each subject card.
+
+When the delete button is clicked:
+
+1. The selected subject is removed from the subject list.
+2. The RecyclerView is notified of the change.
+3. The corresponding subject card is removed from the screen.
+
+This functionality is currently handled using the in-memory subject list.
+<table>
+  <tr>
+    <td><img width="387" height="866" alt="image" src="https://github.com/user-attachments/assets/b05b6e71-cc12-433c-aa8c-2141d0462e9d" /></td>
+    <td><img width="387" height="862" alt="image" src="https://github.com/user-attachments/assets/f6399116-5757-402a-a93e-b4c7d7fbe02f" />
+</td>
+  </tr>
+</table>
+
 ## Current Progress
 
-- [x] Project setup
+- [x] Android Studio project setup
 - [x] Home page
-- [x] Subjects activity
+- [x] Subjects Activity
 - [x] Activity navigation using Intents
-- [x] Add Subject activity
-- [x] Subject Name and Subject Code input
+- [x] Add Subject Activity
+- [x] Subject Name input
+- [x] Subject Code input
 - [x] Passing subject data between activities
 - [x] RecyclerView implementation
 - [x] Custom Subject Adapter
-- [x] MaterialCardView for subject display
+- [x] MaterialCardView subject design
+- [x] Delete Subject functionality
+- [x] ConstraintLayout-based UI
 - [ ] Persistent subject storage using SQLite
-- [ ] Edit/Delete subject functionality
+- [ ] Edit Subject functionality
 - [ ] Tasks module
 - [ ] Exams module
 - [ ] Timetable module
+- [ ] Final UI improvements
+- [ ] Testing and bug fixing
