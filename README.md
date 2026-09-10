@@ -152,7 +152,51 @@ Subjects can now be added to and deleted from the SQLite database while the Recy
 
 <img width="372" height="861" alt="image" src="https://github.com/user-attachments/assets/6a312da1-4cfd-4d98-94da-3ad9c53e8d62" />
 
+## Edit Subject Functionality
 
+Implemented the **Edit Subject** feature to allow users to modify existing subject information.
+
+### Features Implemented
+
+- Added an Edit button to each subject card.
+- Opens a dedicated Edit Subject Activity.
+- Automatically displays the existing subject name and code.
+- Allows users to modify subject details.
+- Updates the corresponding record in the SQLite database.
+- Refreshes the RecyclerView after updating.
+- Updated information persists after restarting the application.
+
+### Data Flow
+
+```text
+Select Subject
+      │
+      ▼
+Edit Button
+      │
+      ▼
+Edit Subject Activity
+      │
+      ▼
+Update Subject Details
+      │
+      ▼
+SQLite UPDATE
+      │
+      ▼
+Refresh RecyclerView
+```
+
+### Demonstration
+
+<table>
+  <tr>
+    <td><img width="380" height="852" alt="image" src="https://github.com/user-attachments/assets/bcf5220d-14ff-4a37-a520-1592d0c472d3" /></td>
+    <td><img width="390" height="871" alt="image" src="https://github.com/user-attachments/assets/13736c75-2318-4f18-baf3-8b4946c57ad9" /></td>
+    <td><img width="391" height="871" alt="image" src="https://github.com/user-attachments/assets/21135ebf-c594-4b5c-83f4-253c7d1e7bd2" /></td>
+    <td><img width="391" height="861" alt="image" src="https://github.com/user-attachments/assets/b0153f55-b974-4110-9a3b-5bbdf8c0f2c4" /></td>
+  </tr>
+</table>
 
 ## Current Progress
 
@@ -173,11 +217,10 @@ Subjects can now be added to and deleted from the SQLite database while the Recy
 - [x] SQLite database integration
 - [x] Persistent subject storage (Load on app restart)
 - [x] Delete subject from SQLite database
+- [x] Edit subject functionality
 
 ### Upcoming Features
 
-
-- [ ] Edit subject functionality
 - [ ] Tasks module
 - [ ] Exams module
 - [ ] Timetable module
