@@ -198,6 +198,89 @@ Refresh RecyclerView
   </tr>
 </table>
 
+## Tasks Module
+### Add Task
+
+The Add Task feature allows users to create a new academic task by entering details such as:
+
+Task Title
+Task Description
+Due Date
+Priority
+
+When the user clicks the Save Task button, the task details are validated and stored in the SQLite database. A confirmation message is displayed after successful insertion.
+
+<table>
+  <tr>
+    <td><img width="381" height="867" alt="image" src="https://github.com/user-attachments/assets/96147c25-14ae-4b52-8b03-518f7e836249" /></td>
+    <td><img width="387" height="845" alt="image" src="https://github.com/user-attachments/assets/1cd30b38-e883-4cc7-9e7e-93d63e77c3de" /></td>
+  </tr>
+</table>
+
+### Delete Task
+The Delete Task feature allows users to remove tasks that are no longer required.
+
+Each task card contains a delete button. When the button is clicked, the corresponding task is deleted from the SQLite database and removed from the RecyclerView.
+
+<table>
+  <tr>
+    <td><img width="390" height="866" alt="image" src="https://github.com/user-attachments/assets/15a660eb-d88e-45ac-8c2a-af160d3ddb27" /></td>
+    <td><img width="395" height="867" alt="image" src="https://github.com/user-attachments/assets/b843ed71-0f40-4226-9d54-19067195eeae" /></td>
+  </tr>
+</table>
+
+### Edit Task
+
+The Edit Task feature allows users to modify previously added tasks. Users can update the task title, description, due date, or priority.
+
+The selected task details are loaded into the Edit Task screen. After updating the information, the changes are saved in the SQLite database, and the updated task list is displayed.
+
+<table>
+  <tr>
+    <td><img width="392" height="870" alt="image" src="https://github.com/user-attachments/assets/6f36a18e-4e0a-42a1-9667-3c5e920d670d" /></td>
+    <td><img width="378" height="867" alt="image" src="https://github.com/user-attachments/assets/0bd89bc3-9e86-4860-b42a-f4856a0b0f6d" /></td>
+     <td><img width="377" height="862" alt="image" src="https://github.com/user-attachments/assets/3e9b69ac-7208-4900-a903-f95a7294d477" /></td>
+    <td><img width="400" height="847" alt="image" src="https://github.com/user-attachments/assets/f6607591-e374-45b1-a84d-503822a33d4c" /></td>
+  </tr>
+</table>
+
+### SQLite database integration
+
+SQLite is used as the local database for storing task information.
+
+The tasks table contains the following fields:
+
+### Tasks Table Structure
+
+| Field | Description |
+| --- | --- |
+| `id` | Unique identifier for each task |
+| `title` | Name of the task |
+| `description` | Detailed description of the task |
+| `dueDate` | Deadline of the task |
+| `priority` | Priority level of the task |
+| `isCompleted` | Stores whether the task is completed or incomplete |
+
+The database ensures that task data remains available even after navigating between activities or restarting the application.
+
+### Mark as completed
+
+A completion checkbox has been added to every task card. Users can mark a task as completed by selecting the checkbox.
+
+Unchecked checkbox indicates an incomplete task.
+Checked checkbox indicates a completed task.
+
+The completion status is stored in SQLite using the isCompleted field, where 0 represents incomplete and 1 represents completed.
+
+The checkbox state is restored whenever tasks are loaded from the database, ensuring that completion progress is preserved.
+
+<table>
+<tr>
+    <td><img width="392" height="851" alt="image" src="https://github.com/user-attachments/assets/df25f950-94e8-4606-8243-d7ca14c1a74d" /></td>
+    <td><img width="401" height="860" alt="image" src="https://github.com/user-attachments/assets/c0f602e7-9cf0-4d52-b6dc-e499a6868fbe" /></td>
+  </tr>
+</table>
+
 ## Current Progress
 
 ### Completed
@@ -218,10 +301,15 @@ Refresh RecyclerView
 - [x] Persistent subject storage (Load on app restart)
 - [x] Delete subject from SQLite database
 - [x] Edit subject functionality
+- [x] Tasks module
+  - [x] Add Task
+  - [x] Edit Task
+  - [x] Delete Task
+  - [x] SQLite database integration
+  - [x] Add task completion Checkbox
 
 ### Upcoming Features
 
-- [ ] Tasks module
 - [ ] Exams module
 - [ ] Timetable module
 - [ ] UI polishing
