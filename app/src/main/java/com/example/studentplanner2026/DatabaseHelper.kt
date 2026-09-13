@@ -4,7 +4,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class DatabaseHelper(context: Context): SQLiteOpenHelper(context, "AcademicPlanner.db", null, 1) {
+class DatabaseHelper(context: Context): SQLiteOpenHelper(context, "AcademicPlanner.db", null, 2) {
     override fun onCreate(db: SQLiteDatabase) {
 
         db.execSQL(
@@ -16,6 +16,19 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, "AcademicPlann
             )
             """.trimIndent()
         )
+
+        db.execSQL(
+            """
+    CREATE TABLE tasks (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT,
+        description TEXT,
+        dueDate TEXT,
+        priority TEXT,
+        isCompleted INTEGER
+    )
+    """.trimIndent()
+        )
     }
 
     override fun onUpgrade(
@@ -23,7 +36,19 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, "AcademicPlann
         oldVersion: Int,
         newVersion: Int
     ) {
-        db.execSQL("DROP TABLE IF EXISTS subjects")
-        onCreate(db)
+        if (oldVersion < 2) {
+            db.execSQL(
+                """
+            CREATE TABLE IF NOT EXISTS tasks (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                title TEXT,
+                description TEXT,
+                dueDate TEXT,
+                priority TEXT,
+                isCompleted INTEGER DEFAULT 0
+            )
+            """.trimIndent()
+            )
+        }
     }
 }

@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
     lateinit var subjectsButton: Button
+    lateinit var btnTasks: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -22,6 +23,12 @@ class MainActivity : AppCompatActivity() {
         subjectsButton=findViewById<Button>(R.id.btnSubjects)
         subjectsButton.setOnClickListener {
             val intent= Intent(this, SubjectsActivity::class.java)
+            startActivity(intent)
+        }
+
+        btnTasks = findViewById<Button>(R.id.btnTasks)
+        btnTasks.setOnClickListener {
+            val intent = Intent(this, TasksActivity::class.java)
             startActivity(intent)
         }
     }
