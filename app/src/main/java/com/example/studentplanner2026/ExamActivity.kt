@@ -3,6 +3,7 @@ package com.example.studentplanner2026
 import android.content.Intent
 import android.database.Cursor
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -37,6 +38,7 @@ class ExamActivity : AppCompatActivity() {
     }
     override fun onResume() {
         super.onResume()
+        deleteExpiredExams()
         loadExams()
     }
     private fun loadExams(){
@@ -67,6 +69,65 @@ class ExamActivity : AppCompatActivity() {
         }
         cursor.close()
         db.close()
-        recyclerExams.adapter= ExamAdapter(exams)
+        recyclerExams.adapter= ExamAdapter(exams){ exam ->
+            deleteExam(exam)
+        }
+    }
+
+    private fun deleteExam(exam: Exam) {
+        val db = dbHelper.writableDatabase
+
+        db.delete(
+            "exams",
+            "id = ?",
+            arrayOf(exam.id.toString())
+        )
+
+        db.close()
+
+        Toast.makeText(this, "Exam deleted", Toast.LENGTH_SHORT).show()
+
+        loadExams()
+    }
+
+    private fun deleteExpiredExams() {
+        val db = dbHelper.writableDatabase
+
+        val currentDateTime = System.currentTimeMillis()
+
+        val cursor = db.rawQuery("SELECT * FROM exams", null)
+
+        while (cursor.moveToNext()) {
+            val id = cursor.getInt(cursor.getColumnIndexOrThrow("id"))
+            val examDate = cursor.getString(cursor.getColumnIndexOrThrow("examDate"))
+            val examTime = cursor.getString(cursor.getColumnIndexOrThrow("examTime"))
+
+            try {
+                val dateTimeString = "$examDate $examTime"
+
+                val formatter = java.text.SimpleDateFormat(
+                    "dd/MM/yyyy HH:mm",
+                    java.util.Locale.getDefault()
+                )
+
+                val examDateTime = formatter.parse(dateTimeString)
+
+                if (examDateTime != null &&
+                    examDateTime.time < currentDateTime
+                ) {
+                    db.delete(
+                        "exams",
+                        "id = ?",
+                        arrayOf(id.toString())
+                    )
+                }
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        cursor.close()
+        db.close()
     }
 }

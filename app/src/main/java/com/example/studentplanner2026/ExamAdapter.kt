@@ -7,7 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class ExamAdapter (
-    private val exams: List<Exam>
+    private val exams: List<Exam>,
+    private val onDeleteClick: (Exam) -> Unit
 ): RecyclerView.Adapter<ExamAdapter.ExamViewHolder>(){
 
     inner class ExamViewHolder(itemView: View):
@@ -17,6 +18,7 @@ class ExamAdapter (
                 val dateTextView: TextView=itemView.findViewById<TextView>(R.id.tvExamDate)
                 val timeTextView: TextView=itemView.findViewById<TextView>(R.id.tvExamTime)
                 val venueTextView: TextView=itemView.findViewById<TextView>(R.id.tvExamVenue)
+                val deleteButton: TextView=itemView.findViewById<TextView>(R.id.btnDeleteExam)
             }
 
     override fun onCreateViewHolder(
@@ -34,6 +36,10 @@ class ExamAdapter (
         holder.dateTextView.text = "Date: ${exam.examDate}"
         holder.timeTextView.text = "Time: ${exam.examTime}"
         holder.venueTextView.text = "Venue: ${exam.venue}"
+
+        holder.deleteButton.setOnClickListener {
+            onDeleteClick(exam)
+        }
     }
 
     override fun getItemCount(): Int {
