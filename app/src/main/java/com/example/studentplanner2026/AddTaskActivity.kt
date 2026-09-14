@@ -73,7 +73,8 @@ class AddTaskActivity : AppCompatActivity() {
 
             finish()
         } else {
-            Toast.makeText(this, "Failed to save task", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Fa" +
+                    "iled to save task", Toast.LENGTH_SHORT).show()
         }
 
         db.close()
