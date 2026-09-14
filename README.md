@@ -281,6 +281,53 @@ The checkbox state is restored whenever tasks are loaded from the database, ensu
   </tr>
 </table>
 
+## Exam Module
+The Exams module allows students to manage their upcoming examinations. Users can add exam details such as subject, date, time, and venue. The saved exams are stored in the SQLite database and displayed in a scrollable RecyclerView.
+
+Features
+- Add Exam
+- Select exam date using DatePickerDialog
+- Select exam time using TimePickerDialog
+- Store exam details using SQLite database
+- Display all exams in a RecyclerView
+- Automatically refresh the exam list when returning to the Exams screen
+
+### Files Used
+
+| File                    | Description                                   |
+| ----------------------- | --------------------------------------------- |
+| `Exam.kt`               | Data class representing exam details          |
+| `AddExamActivity.kt`    | Handles adding new exam records               |
+| `ExamActivity.kt`       | Displays the list of exams                    |
+| `ExamAdapter.kt`        | Connects exam data with RecyclerView items    |
+| `activity_add_exam.xml` | Layout for entering exam details              |
+| `activity_exam.xml`     | Layout for the Exams screen                   |
+| `exam_item.xml`         | Layout for individual exam cards              |
+| `DatabaseHelper.kt`     | Creates and manages the exams table in SQLite |
+
+### Exams Table Structure
+
+| Field      | Description                     |
+| ---------- | ------------------------------- |
+| `id`       | Unique identifier for each exam |
+| `subject`  | Name of the examination subject |
+| `examDate` | Date of the examination         |
+| `examTime` | Time of the examination         |
+| `venue`    | Examination venue or classroom  |
+
+
+### Add Exam
+Allows students to add examination details including subject, date, time, and venue. Date and time can be selected using Android's DatePickerDialog and TimePickerDialog, and the data is stored locally in SQLite.
+
+<table>
+  <tr>
+    <td><img width="382" height="870" alt="image" src="https://github.com/user-attachments/assets/fd207369-82cc-4fc7-91ff-65418b9a4b57" /></td>
+    <td><img width="386" height="862" alt="image" src="https://github.com/user-attachments/assets/25375e6b-bce9-4ccb-ab5c-e809e623a6bc" /></td>
+    <td><img width="393" height="872" alt="image" src="https://github.com/user-attachments/assets/048ef13c-50ec-40f5-b45b-464fa02ddef0" /></td>
+    <td><img width="393" height="876" alt="image" src="https://github.com/user-attachments/assets/df8221dc-abb5-4085-8d9a-bfef374f8721" /></td>
+  </tr>
+</table>
+
 ## Current Progress
 
 ### Completed
@@ -307,10 +354,14 @@ The checkbox state is restored whenever tasks are loaded from the database, ensu
   - [x] Delete Task
   - [x] SQLite database integration
   - [x] Add task completion Checkbox
+- [x] Exams module
+  - [x] Add Exam
+  - [x] SQLlite database integration
+  - [x] Display exams in RecyclerView
+  - [x] DatePicker and TimePicker integration
 
 ### Upcoming Features
 
-- [ ] Exams module
 - [ ] Timetable module
 - [ ] UI polishing
 - [ ] Testing and bug fixes
