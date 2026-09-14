@@ -358,6 +358,88 @@ If an exam's scheduled time has passed, the record is permanently deleted from t
   </tr>
 </table>
 
+## Timetable Module
+The Timetable module helps students organize their weekly class schedules. Users can add timetable entries by specifying the day, subject, start time, end time, and venue. All entries are stored locally using SQLite and displayed in an organized RecyclerView.
+
+Features
+Add new timetable entries.
+Select a day from a predefined dropdown list.
+Select start and end times using TimePickerDialog.
+Enter subject and venue details.
+Store timetable entries in SQLite.
+Display timetable entries in a scrollable RecyclerView.
+Automatically sort entries by day of the week and start time.
+Delete individual timetable entries.
+Validate that all required fields are completed.
+
+### Add Class
+The Add Timetable screen provides a form for entering weekly class schedule details. A dropdown menu is used for selecting the day, while time picker dialogs are used for selecting class timings. The entered information is saved to the SQLite database after validation.
+
+| File                         | Description                                                                |
+| ---------------------------- | -------------------------------------------------------------------------- |
+| `AddTimetableActivity.kt`    | Handles timetable input, day selection, time selection, and saving records |
+| `activity_add_timetable.xml` | User interface for adding timetable entries                                |
+| `Timetable.kt`               | Data class representing timetable information                              |
+| `DatabaseHelper.kt`          | Manages the SQLite timetable table                                         |
+
+<table>
+  <tr>
+    <td><img width="391" height="868" alt="image" src="https://github.com/user-attachments/assets/dbfb5b67-4eb0-4f76-81a9-8b3067cf5a34" /></td>
+    <td><img width="382" height="866" alt="image" src="https://github.com/user-attachments/assets/7ed3e25b-30ef-4a11-b33e-9d02cce67b83" /></td>
+    <td><img width="392" height="872" alt="image" src="https://github.com/user-attachments/assets/f4e6787e-c146-4acf-bf8f-f8580708a1e7" /></td>
+    <td><img width="383" height="870" alt="image" src="https://github.com/user-attachments/assets/db7b131b-68cf-45a3-852a-238578c9a088" /></td>
+  </tr>
+</table>
+
+Classes are Arranged According to WEEKDAY
+<table>
+  <tr>
+    <td><img width="383" height="870" alt="image" src="https://github.com/user-attachments/assets/db7b131b-68cf-45a3-852a-238578c9a088" /></td>
+    <td><img width="386" height="867" alt="image" src="https://github.com/user-attachments/assets/18fce1d0-ac56-42d1-9ef3-49106d8fb407" /></td>
+    <td><img width="385" height="871" alt="image" src="https://github.com/user-attachments/assets/79d384fd-0c7a-46a3-9939-8282a92a3a7e" /></td>
+  </tr>
+</table>
+
+### Delete Class
+The Timetable screen displays all saved classes in a RecyclerView. Each timetable item shows the day, subject, class timing, and venue. Users can delete individual timetable entries, which permanently removes the selected record from the SQLite database.
+
+| File                     | Description                                           |
+| ------------------------ | ----------------------------------------------------- |
+| `TimetableActivity.kt`   | Loads, sorts, displays, and deletes timetable records |
+| `TimetableAdapter.kt`    | Connects timetable data with RecyclerView items       |
+| `activity_timetable.xml` | Layout for the Timetable screen                       |
+| `timetable_item.xml`     | Layout for individual timetable cards                 |
+
+<table>
+  <tr>
+    <td><img width="383" height="868" alt="image" src="https://github.com/user-attachments/assets/459894f2-afb9-437b-b2ea-08eb7724ac77" /></td>
+    <td><img width="391" height="866" alt="image" src="https://github.com/user-attachments/assets/b377ad0c-0c08-45b3-8fbb-956f971d8fa0" /></td>
+  </tr>
+</table>
+
+### Timetable Structure
+
+| Field       | Description                                |
+| ----------- | ------------------------------------------ |
+| `id`        | Unique identifier for each timetable entry |
+| `day`       | Day of the week                            |
+| `subject`   | Name of the subject                        |
+| `startTime` | Class starting time                        |
+| `endTime`   | Class ending time                          |
+| `venue`     | Classroom or venue                         |
+
+SQLite Database
+```text
+CREATE TABLE timetable (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    day TEXT,
+    subject TEXT,
+    startTime TEXT,
+    endTime TEXT,
+    venue TEXT
+);
+```
+
 ## Current Progress
 
 ### Completed
@@ -386,13 +468,15 @@ If an exam's scheduled time has passed, the record is permanently deleted from t
   - [x] Add task completion Checkbox
 - [x] Exams module
   - [x] Add Exam
-  - [x] SQLlite database integration
+  - [x] SQLite database integration
   - [x] Display exams in RecyclerView
   - [x] DatePicker and TimePicker integration
   - [x] Delete Exam (Manually and Automatically on expiration)
+   - [x] Add Timetable Entry
+   - [x] Classes Arragement
+   - [x] Delete Class
 
 ### Upcoming Features
 
-- [ ] Timetable module
 - [ ] UI polishing
 - [ ] Testing and bug fixes
