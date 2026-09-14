@@ -323,8 +323,38 @@ Allows students to add examination details including subject, date, time, and ve
   <tr>
     <td><img width="382" height="870" alt="image" src="https://github.com/user-attachments/assets/fd207369-82cc-4fc7-91ff-65418b9a4b57" /></td>
     <td><img width="386" height="862" alt="image" src="https://github.com/user-attachments/assets/25375e6b-bce9-4ccb-ab5c-e809e623a6bc" /></td>
+  </tr>
+  <tr>
     <td><img width="393" height="872" alt="image" src="https://github.com/user-attachments/assets/048ef13c-50ec-40f5-b45b-464fa02ddef0" /></td>
     <td><img width="393" height="876" alt="image" src="https://github.com/user-attachments/assets/df8221dc-abb5-4085-8d9a-bfef374f8721" /></td>
+  </tr>
+</table>
+
+## Delete Exam
+The Exams screen displays all saved examinations using a RecyclerView. Each exam item contains the subject, date, time, and venue, along with a Delete button.
+
+### Manual Deletion
+When the Delete button is clicked, the selected exam is removed from the SQLite database using its unique ID. The RecyclerView is then refreshed to reflect the deletion.
+<table>
+  <tr>
+    <td><img width="390" height="866" alt="image" src="https://github.com/user-attachments/assets/c5032639-2293-4f83-8738-468aa1b269d6" /></td>
+    <td><img width="395" height="865" alt="image" src="https://github.com/user-attachments/assets/987f5fb8-e6e4-47d5-a5b0-c33f98711f07" /></td>
+  </tr>
+</table>
+
+### Automatic Expired Exam Deletion
+The application includes an automatic cleanup mechanism for expired examinations. Whenever the Exams screen is opened or resumed, the application compares each exam's scheduled date and time with the current date and time.
+
+If an exam's scheduled time has passed, the record is permanently deleted from the SQLite database and will no longer appear in the RecyclerView.
+
+<table>
+  <tr>
+    <td> At 11:29 pm </td>
+    <td> At 11:30 pm </td>
+  </tr>
+  <tr>
+    <td><img width="392" height="873" alt="image" src="https://github.com/user-attachments/assets/33bbe225-8933-4174-a284-7822192b4fbf" /></td>
+    <td><img width="390" height="863" alt="image" src="https://github.com/user-attachments/assets/d885c926-dfbb-43e4-b5be-5e2bc4bd8fa2" /></td>
   </tr>
 </table>
 
@@ -359,6 +389,7 @@ Allows students to add examination details including subject, date, time, and ve
   - [x] SQLlite database integration
   - [x] Display exams in RecyclerView
   - [x] DatePicker and TimePicker integration
+  - [x] Delete Exam (Manually and Automatically on expiration)
 
 ### Upcoming Features
 
