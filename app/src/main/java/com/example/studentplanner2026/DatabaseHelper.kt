@@ -4,21 +4,18 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class DatabaseHelper(context: Context): SQLiteOpenHelper(context, "AcademicPlanner.db", null, 3) {
+class DatabaseHelper(context: Context): SQLiteOpenHelper(context, "AcademicPlanner.db", null, 4) {
     override fun onCreate(db: SQLiteDatabase) {
 
-        db.execSQL(
-            """
+        db.execSQL("""
             CREATE TABLE subjects (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT,
                 code TEXT
             )
-            """.trimIndent()
-        )
+        """.trimIndent())
 
-        db.execSQL(
-            """ 
+        db.execSQL(""" 
             CREATE TABLE tasks (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 title TEXT,
@@ -27,8 +24,7 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, "AcademicPlann
                 priority TEXT,
                 isCompleted INTEGER
             )
-            """.trimIndent()
-        )
+        """.trimIndent())
 
         db.execSQL("""
             CREATE TABLE exams (
@@ -38,8 +34,17 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, "AcademicPlann
                 examTime TEXT,
                 venue TEXT
             )
-            """.trimIndent()
-        )
+        """.trimIndent())
+        db.execSQL("""
+            CREATE TABLE timetable (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                day TEXT,
+                subject TEXT,
+                startTime TEXT,
+                endTime TEXT,
+                venue TEXT
+            )
+        """.trimIndent())
     }
 
     override fun onUpgrade(
@@ -69,6 +74,19 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, "AcademicPlann
             subject TEXT,
             examDate TEXT,
             examTime TEXT,
+            venue TEXT
+        )
+    """.trimIndent())
+        }
+
+        if (oldVersion < 4) {
+            db.execSQL("""
+        CREATE TABLE IF NOT EXISTS timetable (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            day TEXT,
+            subject TEXT,
+            startTime TEXT,
+            endTime TEXT,
             venue TEXT
         )
     """.trimIndent())

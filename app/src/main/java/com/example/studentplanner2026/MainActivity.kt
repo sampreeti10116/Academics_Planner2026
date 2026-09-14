@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var subjectsButton: Button
     lateinit var btnTasks: Button
     lateinit var btnExams: Button
+    lateinit var btnTimetable: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -38,5 +39,11 @@ class MainActivity : AppCompatActivity() {
             val intent= Intent(this, ExamActivity::class.java)
             startActivity(intent)
         }
+        btnTimetable=findViewById<Button>(R.id.btnTimetable)
+        btnTimetable.setOnClickListener {
+            val intent= Intent(this, TimetableActivity::class.java)
+            startActivity(intent)
+        }
     }
+
 }
