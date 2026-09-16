@@ -440,6 +440,15 @@ CREATE TABLE timetable (
 );
 ```
 
+## Updated UI with back button
+
+<table>
+  <tr>
+    <td><img width="391" height="865" alt="image" src="https://github.com/user-attachments/assets/c9cb374c-7fbb-4b28-b556-0d369987efbb" /></td>
+  </tr>
+</table>
+
+
 ## Current Progress
 
 ### Completed
@@ -472,11 +481,9 @@ CREATE TABLE timetable (
   - [x] Display exams in RecyclerView
   - [x] DatePicker and TimePicker integration
   - [x] Delete Exam (Manually and Automatically on expiration)
-   - [x] Add Timetable Entry
-   - [x] Classes Arragement
-   - [x] Delete Class
+  - [x] Add Timetable Entry
+  - [x] Classes Arragement
+  - [x] Delete Class
+- [x]  UI polishing
+- [x]  Testing and bug fixes
 
-### Upcoming Features
-
-- [ ] UI polishing
-- [ ] Testing and bug fixes
