@@ -15,6 +15,7 @@ class TasksActivity : AppCompatActivity() {
     private lateinit var recyclerTasks: RecyclerView
     private lateinit var btnAddTask: Button
     private lateinit var dbHelper: DatabaseHelper
+    private lateinit var btnBackTasks: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -23,6 +24,11 @@ class TasksActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+        btnBackTasks = findViewById(R.id.btnBackTasks)
+        btnBackTasks.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
         recyclerTasks = findViewById(R.id.recyclerTasks)
         btnAddTask = findViewById(R.id.btnAddTask)

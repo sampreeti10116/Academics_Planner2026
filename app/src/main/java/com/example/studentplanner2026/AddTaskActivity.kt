@@ -1,6 +1,7 @@
 package com.example.studentplanner2026
 
 import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -16,6 +17,7 @@ class AddTaskActivity : AppCompatActivity() {
     private lateinit var etTaskDueDate: EditText
     private lateinit var etTaskPriority: EditText
     private lateinit var btnSaveTask: Button
+    private lateinit var btnBackAddTask: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +25,13 @@ class AddTaskActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_task)
 
         dbHelper = DatabaseHelper(this)
+
+        btnBackAddTask = findViewById(R.id.btnBackAddTask)
+        btnBackAddTask.setOnClickListener {
+            val intent = Intent(this, TasksActivity::class.java)
+            startActivity(intent)
+        }
+
 
         etTaskTitle = findViewById(R.id.edtxtTaskTitle)
         etTaskDescription = findViewById(R.id.edtxtTaskDescription)

@@ -17,6 +17,7 @@ class SubjectsActivity : AppCompatActivity() {
     private val subjects = mutableListOf<Subject>()
     private lateinit var dbHelper: DatabaseHelper
     lateinit var btnAddSub : MaterialButton
+    lateinit var btnBackSub : MaterialButton
     private val addSubjectLauncher =
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
@@ -41,6 +42,12 @@ class SubjectsActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        btnBackSub=findViewById<MaterialButton>(R.id.btnBackSubjects)
+        btnBackSub.setOnClickListener {
+            val intent= Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
 
         recyclerSubjects = findViewById(R.id.RecyclerSubjects)

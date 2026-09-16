@@ -13,6 +13,8 @@ class AddSubjectActivity : AppCompatActivity() {
     lateinit var subjectName: EditText
     lateinit var subjectCode: EditText
     lateinit var btnSaveSubject: MaterialButton
+    lateinit var btnBackAddSubjects: MaterialButton
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -25,6 +27,12 @@ class AddSubjectActivity : AppCompatActivity() {
         subjectName=findViewById<EditText>(R.id.edtxtSubjectName)
         subjectCode=findViewById<EditText>(R.id.edtxtSubjectCode)
         btnSaveSubject=findViewById<MaterialButton>(R.id.btnSaveSubject)
+        btnBackAddSubjects=findViewById<MaterialButton>(R.id.btnBackAddSubjects)
+
+        btnBackAddSubjects.setOnClickListener {
+            val intent = Intent(this, SubjectsActivity::class.java)
+            startActivity(intent)
+        }
 
         btnSaveSubject.setOnClickListener{
             val name = subjectName.text.toString()

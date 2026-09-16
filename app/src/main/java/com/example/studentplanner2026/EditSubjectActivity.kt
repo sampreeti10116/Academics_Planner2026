@@ -1,6 +1,7 @@
 package com.example.studentplanner2026
 
 import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
@@ -23,6 +24,13 @@ class EditSubjectActivity : AppCompatActivity() {
         val subjectName = findViewById<EditText>(R.id.etEditSubjectName)
         val subjectCode = findViewById<EditText>(R.id.etEditSubjectCode)
         val updateButton = findViewById<MaterialButton>(R.id.btnUpdateSubject)
+        val btnBackEditSubjects = findViewById<MaterialButton>(R.id.btnBackEditSubjects)
+
+        btnBackEditSubjects.setOnClickListener {
+            val intent = Intent(this, SubjectsActivity::class.java)
+            startActivity(intent)
+        }
+
 
         val oldName = intent.getStringExtra("subjectName")
         val oldCode = intent.getStringExtra("subjectCode")

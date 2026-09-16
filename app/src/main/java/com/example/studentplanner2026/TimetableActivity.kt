@@ -18,6 +18,7 @@ class TimetableActivity : AppCompatActivity() {
     private lateinit var dbHelper: DatabaseHelper
     private lateinit var recyclerTimetable: RecyclerView
     private lateinit var btnAddTimetable: MaterialButton
+    lateinit var btnBackTimetable : MaterialButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +34,12 @@ class TimetableActivity : AppCompatActivity() {
                 systemBars.bottom
             )
             insets
+        }
+
+        btnBackTimetable=findViewById<MaterialButton>(R.id.btnBackTimetable)
+        btnBackTimetable.setOnClickListener {
+            val intent= Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
 
         dbHelper = DatabaseHelper(this)

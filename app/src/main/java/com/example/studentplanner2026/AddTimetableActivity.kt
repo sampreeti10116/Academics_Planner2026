@@ -3,6 +3,7 @@ package com.example.studentplanner2026
 import android.annotation.SuppressLint
 import android.app.TimePickerDialog
 import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -22,6 +23,7 @@ class AddTimetableActivity : AppCompatActivity() {
     private lateinit var endTimeEditText: TextInputEditText
     private lateinit var venueEditText: TextInputEditText
     private lateinit var saveButton: MaterialButton
+    lateinit var btnBackAddClass : MaterialButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +53,12 @@ class AddTimetableActivity : AppCompatActivity() {
             android.R.layout.simple_dropdown_item_1line,
             days
         )
+
+        btnBackAddClass=findViewById<MaterialButton>(R.id.btnBackAddClass)
+        btnBackAddClass.setOnClickListener {
+            val intent= Intent(this, TimetableActivity::class.java)
+            startActivity(intent)
+        }
 
         dayAutoComplete.setAdapter(dayAdapter)
 

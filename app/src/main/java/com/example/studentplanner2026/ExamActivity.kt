@@ -16,6 +16,7 @@ class ExamActivity : AppCompatActivity() {
     private lateinit var dbHelper: DatabaseHelper
     private lateinit var recyclerExams: RecyclerView
     private lateinit var btnAddExam: MaterialButton
+    private lateinit var btnBackExam: MaterialButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +26,11 @@ class ExamActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+        btnBackExam = findViewById(R.id.btnBackExam)
+        btnBackExam.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
         dbHelper = DatabaseHelper(this)
         recyclerExams = findViewById(R.id.recyclerExams)

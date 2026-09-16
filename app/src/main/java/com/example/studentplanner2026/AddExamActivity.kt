@@ -3,6 +3,7 @@ package com.example.studentplanner2026
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.Toast
@@ -20,6 +21,8 @@ class AddExamActivity : AppCompatActivity() {
     private lateinit var etExamTime: EditText
     private lateinit var etExamVenue: EditText
     private lateinit var btnSaveExam: MaterialButton
+    private lateinit var btnBackAddExam: MaterialButton
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -28,6 +31,11 @@ class AddExamActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+        btnBackAddExam=findViewById<MaterialButton>(R.id.btnBackAddExam)
+        btnBackAddExam.setOnClickListener {
+            val intent= Intent(this, ExamActivity::class.java)
+            startActivity(intent)
         }
 
         dbHelper = DatabaseHelper(this)
