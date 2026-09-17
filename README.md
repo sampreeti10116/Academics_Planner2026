@@ -1,6 +1,70 @@
-# Academics Planner 2026
+# 📚 Academics Planner 2026
 
-A simple Android application designed to help students organize and manage their academic information.
+> Plan smarter. Stay organized. Achieve more.
+
+An Android-based academic planning application designed to help students
+manage subjects, tasks, examinations, and timetables in one place.
+
+![Platform](https://img.shields.io/badge/Platform-Android-green)
+![Language](https://img.shields.io/badge/Language-Kotlin-purple)
+![Database](https://img.shields.io/badge/Database-SQLite-blue)
+![Status](https://img.shields.io/badge/Status-Completed-success)
+
+---
+
+## 🌟 Project Overview
+
+Academics Planner 2026 is a student-focused Android application developed to
+simplify academic planning and daily organization.
+
+The application provides a centralized platform for managing:
+
+- Subjects
+- Academic tasks and assignments
+- Upcoming examinations
+- Weekly class timetables
+- Task completion progress
+
+The project was developed using Android Studio and Kotlin, with SQLite as the
+local database for persistent data storage.
+
+---
+
+## 🛠️ Tech Stack
+
+| Technology | Purpose |
+|------------|---------|
+| Kotlin | Android application development |
+| Android Studio | Integrated Development Environment |
+| XML | User interface design |
+| ConstraintLayout | Responsive screen layouts |
+| SQLite | Local persistent database |
+| SQLiteOpenHelper | Database creation and management |
+| RecyclerView | Displaying dynamic lists |
+| Material Components | UI elements and cards |
+| Activity Result API | Passing data between activities |
+| AlarmManager | Scheduling task reminders |
+| Notification API | Sending task notifications |
+
+---
+
+## 🗄️ Database Structure
+
+The application uses SQLite for local data storage.
+
+The database contains the following major tables:
+
+| Table | Purpose |
+|-------|---------|
+| `subjects` | Stores subject names and subject codes |
+| `tasks` | Stores academic tasks, deadlines, priorities, and completion status |
+| `exams` | Stores examination details such as subject, date, time, and venue |
+| `timetable` | Stores weekly class schedules |
+
+All records are identified using unique auto-incrementing IDs.
+
+The use of SQLite allows data to remain available even after closing and
+reopening the application.
 
 ## Home Page
 
@@ -439,12 +503,45 @@ CREATE TABLE timetable (
     venue TEXT
 );
 ```
-
+z
 ## Updated UI with back button
 
 <table>
   <tr>
     <td><img width="391" height="865" alt="image" src="https://github.com/user-attachments/assets/c9cb374c-7fbb-4b28-b556-0d369987efbb" /></td>
+  </tr>
+</table>
+
+## Dashboard UI Improvements
+
+The Home Page was transformed from a simple navigation screen into a
+centralized academic dashboard.
+
+The redesigned dashboard gives students an immediate overview of their
+academic progress without requiring them to open individual modules.
+
+It dynamically retrieves information from the SQLite database and presents
+subjects, pending tasks, upcoming deadlines, examinations, and completion
+progress in a single interface.
+
+<table>
+  <tr>
+    <td><img width="388" height="867" alt="image" src="https://github.com/user-attachments/assets/08a0557b-c0eb-45dd-ae17-be026a71d074" /></td>
+    <td><img width="391" height="862" alt="image" src="https://github.com/user-attachments/assets/59cb7336-fcaa-4f15-8d05-d7cb5b366263" /></td>
+  </tr>
+</table>
+
+## Task Notifications
+
+A notification feature was added to remind students about upcoming tasks. Users can select a due date and time while creating a task, and the application schedules a reminder using AlarmManager.
+
+The notification system includes a BroadcastReceiver to trigger reminders, a notification channel for Android devices, and permission handling for Android 13 and above. Notifications display the task title and description and are cancelled automatically when the task is completed.
+
+### Demonstration
+<table>
+  <tr>
+    <td><img width="370" height="802" alt="Screenshot 2026-09-17 230653" src="https://github.com/user-attachments/assets/17916734-e461-44d2-9aa7-4b91d42fd9d5" /></td>
+    <td><img width="392" height="866" alt="Screenshot 2026-09-17 230811" src="https://github.com/user-attachments/assets/df3fce38-8cf8-4900-b2da-8bcc19714667" /></td>
   </tr>
 </table>
 
