@@ -11,6 +11,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class ExamActivity : AppCompatActivity() {
     private lateinit var dbHelper: DatabaseHelper
@@ -29,8 +31,7 @@ class ExamActivity : AppCompatActivity() {
         }
         btnBackExam = findViewById(R.id.btnBackExam)
         btnBackExam.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            finish()
         }
         dbHelper = DatabaseHelper(this)
         recyclerExams = findViewById(R.id.recyclerExams)
@@ -47,16 +48,22 @@ class ExamActivity : AppCompatActivity() {
         deleteExpiredExams()
         loadExams()
     }
-    private fun loadExams(){
-        val exams= ArrayList<Exam>()
-        val db=dbHelper.readableDatabase
-        val cursor: Cursor=db.rawQuery(
-            "SELECT * FROM exams ORDER BY id DESC",
+    private fun loadExams() {
+
+        val exams = ArrayList<Exam>()
+        val db = dbHelper.readableDatabase
+
+        val cursor: Cursor = db.rawQuery(
+            "SELECT * FROM exams",
             null
         )
-        while (cursor.moveToNext()){
+
+        while (cursor.moveToNext()) {
+
             val exam = Exam(
-                id = cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                id = cursor.getInt(
+                    cursor.getColumnIndexOrThrow("id")
+                ),
                 subject = cursor.getString(
                     cursor.getColumnIndexOrThrow("subject")
                 ),
@@ -73,9 +80,32 @@ class ExamActivity : AppCompatActivity() {
 
             exams.add(exam)
         }
+
         cursor.close()
         db.close()
-        recyclerExams.adapter= ExamAdapter(exams){ exam ->
+
+        val dateTimeFormat = SimpleDateFormat(
+            "dd/MM/yyyy HH:mm",
+            Locale.getDefault()
+        )
+
+        val sortedExams = exams.sortedWith(
+            compareBy<Exam> {
+
+                try {
+                    dateTimeFormat.parse(
+                        "${it.examDate} ${it.examTime}"
+                    )
+                } catch (e: Exception) {
+                    null
+                }
+
+            }
+        )
+
+        recyclerExams.adapter = ExamAdapter(
+            sortedExams
+        ) { exam ->
             deleteExam(exam)
         }
     }

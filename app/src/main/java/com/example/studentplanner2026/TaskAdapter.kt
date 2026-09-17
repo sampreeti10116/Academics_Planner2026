@@ -46,7 +46,12 @@ class TaskAdapter(
 
         holder.taskTitle.text = task.title
         holder.taskDescription.text = task.description
-        holder.taskDueDate.text = "Due Date: ${task.dueDate}"
+        holder.taskDueDate.text =
+            if (task.dueTime.isNotEmpty()) {
+                "Due: ${task.dueDate} at ${task.dueTime}"
+            } else {
+                "Due: ${task.dueDate}"
+            }
         holder.taskPriority.text = "Priority: ${task.priority}"
 
         holder.deleteButton.setOnClickListener {

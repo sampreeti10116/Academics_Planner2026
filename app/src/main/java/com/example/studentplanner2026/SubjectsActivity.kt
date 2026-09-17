@@ -46,8 +46,7 @@ class SubjectsActivity : AppCompatActivity() {
 
         btnBackSub=findViewById<MaterialButton>(R.id.btnBackSubjects)
         btnBackSub.setOnClickListener {
-            val intent= Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            finish()
         }
 
         recyclerSubjects = findViewById(R.id.RecyclerSubjects)

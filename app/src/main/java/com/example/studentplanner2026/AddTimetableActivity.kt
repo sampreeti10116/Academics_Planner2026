@@ -56,8 +56,7 @@ class AddTimetableActivity : AppCompatActivity() {
 
         btnBackAddClass=findViewById<MaterialButton>(R.id.btnBackAddClass)
         btnBackAddClass.setOnClickListener {
-            val intent= Intent(this, TimetableActivity::class.java)
-            startActivity(intent)
+            finish()
         }
 
         dayAutoComplete.setAdapter(dayAdapter)

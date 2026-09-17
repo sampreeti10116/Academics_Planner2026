@@ -4,7 +4,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class DatabaseHelper(context: Context): SQLiteOpenHelper(context, "AcademicPlanner.db", null, 4) {
+class DatabaseHelper(context: Context): SQLiteOpenHelper(context, "AcademicPlanner.db", null, 5) {
     override fun onCreate(db: SQLiteDatabase) {
 
         db.execSQL("""
@@ -21,6 +21,7 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, "AcademicPlann
                 title TEXT,
                 description TEXT,
                 dueDate TEXT,
+                dueTime TEXT,
                 priority TEXT,
                 isCompleted INTEGER
             )
@@ -90,6 +91,10 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, "AcademicPlann
             venue TEXT
         )
     """.trimIndent())
+        }
+
+        if (oldVersion < 5) {
+            db.execSQL("ALTER TABLE tasks ADD COLUMN dueTime TEXT")
         }
     }
 }

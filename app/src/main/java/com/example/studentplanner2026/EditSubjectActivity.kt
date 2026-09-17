@@ -27,8 +27,7 @@ class EditSubjectActivity : AppCompatActivity() {
         val btnBackEditSubjects = findViewById<MaterialButton>(R.id.btnBackEditSubjects)
 
         btnBackEditSubjects.setOnClickListener {
-            val intent = Intent(this, SubjectsActivity::class.java)
-            startActivity(intent)
+            finish()
         }
 
 

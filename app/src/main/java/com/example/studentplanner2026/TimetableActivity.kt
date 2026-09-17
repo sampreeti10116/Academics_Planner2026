@@ -38,8 +38,7 @@ class TimetableActivity : AppCompatActivity() {
 
         btnBackTimetable=findViewById<MaterialButton>(R.id.btnBackTimetable)
         btnBackTimetable.setOnClickListener {
-            val intent= Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            finish()
         }
 
         dbHelper = DatabaseHelper(this)

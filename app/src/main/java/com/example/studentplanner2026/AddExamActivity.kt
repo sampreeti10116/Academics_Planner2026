@@ -34,8 +34,7 @@ class AddExamActivity : AppCompatActivity() {
         }
         btnBackAddExam=findViewById<MaterialButton>(R.id.btnBackAddExam)
         btnBackAddExam.setOnClickListener {
-            val intent= Intent(this, ExamActivity::class.java)
-            startActivity(intent)
+            finish()
         }
 
         dbHelper = DatabaseHelper(this)
@@ -65,12 +64,21 @@ class AddExamActivity : AppCompatActivity() {
         val datePickerDialog = DatePickerDialog(
             this,
             { _, year, month, dayOfMonth ->
-                etExamDate.setText("$dayOfMonth/${month + 1}/$year")
+
+                val formattedDate = String.format(
+                    "%02d/%02d/%04d",
+                    dayOfMonth,
+                    month + 1,
+                    year
+                )
+
+                etExamDate.setText(formattedDate)
             },
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
             calendar.get(Calendar.DAY_OF_MONTH)
         )
+        datePickerDialog.datePicker.minDate = Calendar.getInstance().timeInMillis
 
         datePickerDialog.show()
     }

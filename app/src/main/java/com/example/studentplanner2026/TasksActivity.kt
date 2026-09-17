@@ -27,8 +27,7 @@ class TasksActivity : AppCompatActivity() {
         }
         btnBackTasks = findViewById(R.id.btnBackTasks)
         btnBackTasks.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            finish()
         }
         recyclerTasks = findViewById(R.id.recyclerTasks)
         btnAddTask = findViewById(R.id.btnAddTask)
@@ -65,6 +64,7 @@ class TasksActivity : AppCompatActivity() {
                 title = cursor.getString(cursor.getColumnIndexOrThrow("title")),
                 description = cursor.getString(cursor.getColumnIndexOrThrow("description")),
                 dueDate = cursor.getString(cursor.getColumnIndexOrThrow("dueDate")),
+                dueTime = cursor.getString(cursor.getColumnIndexOrThrow("dueTime")) ?: "",
                 priority = cursor.getString(cursor.getColumnIndexOrThrow("priority")),
                 isCompleted = cursor.getInt(
                     cursor.getColumnIndexOrThrow("isCompleted")
@@ -104,10 +104,35 @@ class TasksActivity : AppCompatActivity() {
 
         db.close()
 
+        if (isCompleted) {
+
+            // Cancel notification when task is completed
+            TaskNotificationScheduler.cancelTaskNotification(
+                this,
+                task.id
+            )
+
+        } else {
+
+            // Schedule notification again when task is marked incomplete
+            TaskNotificationScheduler.scheduleTaskNotification(
+                context = this,
+                taskId = task.id,
+                title = task.title,
+                description = task.description,
+                dueDate = task.dueDate,
+                dueTime = task.dueTime
+            )
+        }
+
         loadTasks()
     }
 
     private fun deleteTask(task: Task) {
+        TaskNotificationScheduler.cancelTaskNotification(
+            this,
+            task.id
+        )
 
         val db = dbHelper.writableDatabase
 

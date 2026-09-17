@@ -30,8 +30,7 @@ class AddSubjectActivity : AppCompatActivity() {
         btnBackAddSubjects=findViewById<MaterialButton>(R.id.btnBackAddSubjects)
 
         btnBackAddSubjects.setOnClickListener {
-            val intent = Intent(this, SubjectsActivity::class.java)
-            startActivity(intent)
+            finish()
         }
 
         btnSaveSubject.setOnClickListener{

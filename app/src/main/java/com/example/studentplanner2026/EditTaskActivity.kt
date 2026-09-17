@@ -1,12 +1,14 @@
 package com.example.studentplanner2026
 
+import android.app.DatePickerDialog
 import android.content.ContentValues
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import java.util.Calendar
+import java.util.Locale
 
 class EditTaskActivity : AppCompatActivity() {
 
@@ -17,7 +19,7 @@ class EditTaskActivity : AppCompatActivity() {
     private lateinit var etTaskDueDate: EditText
     private lateinit var etTaskPriority: EditText
     private lateinit var btnUpdateTask: Button
-    lateinit var btnBackEditTask : Button
+    private lateinit var btnBackEditTask: Button
 
     private var taskId: Int = -1
 
@@ -25,13 +27,13 @@ class EditTaskActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_edit_task)
-        btnBackEditTask=findViewById<Button>(R.id.btnBackEditTask)
-        btnBackEditTask.setOnClickListener {
-            val intent= Intent(this, TasksActivity::class.java)
-            startActivity(intent)
-        }
 
         dbHelper = DatabaseHelper(this)
+
+        btnBackEditTask = findViewById(R.id.btnBackEditTask)
+        btnBackEditTask.setOnClickListener {
+            finish()
+        }
 
         etTaskTitle = findViewById(R.id.edtxtEditTaskTitle)
         etTaskDescription = findViewById(R.id.edtxtEditTaskDescription)
@@ -46,9 +48,64 @@ class EditTaskActivity : AppCompatActivity() {
         etTaskDueDate.setText(intent.getStringExtra("taskDueDate") ?: "")
         etTaskPriority.setText(intent.getStringExtra("taskPriority") ?: "")
 
+        // Open Date Picker
+        etTaskDueDate.setOnClickListener {
+            showDatePicker()
+        }
+
         btnUpdateTask.setOnClickListener {
             updateTask()
         }
+    }
+
+    private fun showDatePicker() {
+        val calendar = Calendar.getInstance()
+
+        val currentDate = etTaskDueDate.text.toString().trim()
+
+        if (currentDate.isNotEmpty()) {
+            try {
+                val parts = currentDate.split("-")
+
+                if (parts.size == 3) {
+                    calendar.set(
+                        parts[0].toInt(),
+                        parts[1].toInt() - 1,
+                        parts[2].toInt()
+                    )
+                }
+            } catch (e: Exception) {
+                // Keep today's date if the stored date cannot be parsed
+            }
+        }
+
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(
+            this,
+            { _, selectedYear, selectedMonth, selectedDay ->
+
+                val formattedDate = String.format(
+                    Locale.getDefault(),
+                    "%04d-%02d-%02d",
+                    selectedYear,
+                    selectedMonth + 1,
+                    selectedDay
+                )
+
+                etTaskDueDate.setText(formattedDate)
+            },
+            year,
+            month,
+            day
+        )
+
+        datePickerDialog.datePicker.minDate =
+            System.currentTimeMillis() - 1000
+
+        datePickerDialog.show()
     }
 
     private fun updateTask() {
@@ -64,7 +121,7 @@ class EditTaskActivity : AppCompatActivity() {
         }
 
         if (dueDate.isEmpty()) {
-            etTaskDueDate.error = "Enter due date"
+            etTaskDueDate.error = "Select due date"
             return
         }
 
